@@ -1,0 +1,55 @@
+.mainDiv{
+    background: hsla(208, 68%, 22%, 0.90);
+    height:auto;
+    min-height: 200px;
+    width: 30%;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 5px;
+    position: absolute;
+    left: 30%;
+    top: 30%;
+}
+
+.example-container{
+    height: 50%;
+    width: 70%;
+    text-align: left;
+}
+.example-container input{
+    height: 30px;
+    border:1px solid black;
+    color: black;
+    border-radius: 3px;
+    background-color: aliceblue;
+}
+.example-container .error{
+    margin-top: 5px;
+    color: black;
+}
+.example-container span{
+    font-weight: 600;
+}
+.d-flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.mat-form-field{
+    width: 100%;
+}
+.mt-top{
+    margin-top: 30px;
+}
+.buttondiv{
+    margin-top: 30px;
+    text-align: center;
+}
+.mt-top-2{
+    margin-top: 10px;
+}
