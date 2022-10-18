@@ -1,9 +1,22 @@
+<!-- <span>sign-up works!</span> -->
+
 <!-- <p>login works!</p> -->
 
 <div class="mainDiv">
-    <h4> Sign In</h4>
+    <h4> Sign Up</h4>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="d-flex-center">
       <div class="example-container">
+        <div>
+            <mat-form-field>
+              <span>UserName<b>*</b></span>
+              <input matInput  formControlName="uname">
+              <mat-error class="error" *ngIf="loginForm.get('uname')?.invalid && (loginForm.get('uname')?.dirty || loginForm.get('uname')?.touched) && loginForm.get('uname')?.errors?.required">
+                UserName is required
+              </mat-error>
+            </mat-form-field>
+        </div>
+          <br/>
+
         <div>
           <mat-form-field>
             <span>E-Mail<b>*</b></span>
@@ -16,7 +29,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <br/>
+            <br/>
         <div class="mt-top-2">
           <mat-form-field>
             <span>Password<b>*</b></span>
@@ -32,11 +45,7 @@
         <div class="buttondiv">
           <button [disabled]="!loginForm.valid" mat-raised-button color="primary" mat-button>Sign In</button>
         </div>
-        <div class="botDiv">
-          <p>Don't have an account ?  
-            <u (click)="signUp()">Sign Up</u>
-          </p>
-        </div>
+       
       </div>
     </form>
 </div>

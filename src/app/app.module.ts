@@ -8,12 +8,14 @@ import { LoginComponent } from './login/login.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
