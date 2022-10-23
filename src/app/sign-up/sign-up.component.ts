@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {Router } from '@angular/router';
+import axios from 'axios';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +16,7 @@ export class SignUpComponent implements OnInit {
   constructor(private router:Router) 
   {
     this.loginForm = new FormGroup({
-    uname:new FormControl(''),
+    name:new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email,Validators.pattern(
       '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$',
     ),]),
@@ -26,13 +28,41 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onSubmit(){
+  async onSubmit(){
     if(!this.loginForm.valid){
       return;
     }
-    console.log(this.loginForm.value);
-    localStorage.setItem('user',this.loginForm.value);
-    this.router.navigate(['/home']);
+    let datas = this.loginForm.value;
+    datas['token']=""
+    console.log(datas);
+    localStorage.setItem('user',JSON.stringify(datas));
+    try {
+      await axios({
+        method: 'post',
+        url: 'http://127.0.0.1:5002/createuser',
+        data:datas
+      }).then( (response) => {
+          console.log(response);
+          if(response.data){
+            let data = response.data;
+            if(response.data.status){
+              console.log(data);              
+              alert(data.status);
+              if(data.status!=="EMail Already Exist"){
+                this.router.navigate(['/login']);
+              };              
+            }
+          }
+          else{
+            // this.toastr.error('Invalid Cre dentials!', 'Try again!');
+            alert("Try again later !..");
+          }
+        });
+    } catch (error) {
+      alert("Internal Server Error !..");      
+      console.log(error);
+    } 
+    
   }
 
 }

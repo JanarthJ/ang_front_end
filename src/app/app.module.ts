@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { PgNotFoundComponent } from './pg-not-found/pg-not-found.component';
+
 
 @NgModule({
   declarations: [
@@ -16,6 +19,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     HomeComponent,
     LoginComponent,
     SignUpComponent,
+    PgNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,9 +28,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [HttpClientModule,HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

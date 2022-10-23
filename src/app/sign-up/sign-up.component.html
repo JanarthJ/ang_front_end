@@ -9,8 +9,8 @@
         <div>
             <mat-form-field>
               <span>UserName<b>*</b></span>
-              <input matInput  formControlName="uname">
-              <mat-error class="error" *ngIf="loginForm.get('uname')?.invalid && (loginForm.get('uname')?.dirty || loginForm.get('uname')?.touched) && loginForm.get('uname')?.errors?.required">
+              <input matInput  formControlName="name">
+              <mat-error class="error" *ngIf="loginForm.get('name')?.invalid && (loginForm.get('name')?.dirty || loginForm.get('name')?.touched) && loginForm.get('name')?.errors?.required">
                 UserName is required
               </mat-error>
             </mat-form-field>
@@ -43,7 +43,7 @@
           </mat-form-field>
         </div>
         <div class="buttondiv">
-          <button [disabled]="!loginForm.valid" mat-raised-button color="primary" mat-button>Sign In</button>
+          <button [disabled]="!loginForm.valid" mat-raised-button color="primary" mat-button>Sign Up</button>
         </div>
        
       </div>
