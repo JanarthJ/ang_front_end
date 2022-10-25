@@ -27,10 +27,17 @@
                     </button>             
                 </div>
                 <div>
-                    ji                    
+                    <div class="selectValue">
+                        <label>Column Name :</label><br>
+                        <select [(ngModel)]="selectedValue" [disabled]="disables" name="columns">
+                          <option *ngFor="let column of coloumns" [value]="column.value">
+                            {{column.viewValue}}
+                          </option>
+                        </select>
+                    </div>
                 </div>
                 <div>hj</div>
-                <div>
+                <div class="preditbutn">
                     <button (click)="submit()" [disabled]="disables" mat-flat-button color="accent">
                         <span>Predict</span>                        
                     </button>

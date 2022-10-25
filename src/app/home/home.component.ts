@@ -17,8 +17,10 @@ export class HomeComponent implements OnInit {
   format: any;
   formfile: any;
   file:any;
+  coloumns:any;
   showLoader: boolean = false;
   disables: boolean=true;
+  selectedValue!: string;
 
   constructor(private router:Router,private _snackBar: MatSnackBar,private http: HttpClient){
 
@@ -67,7 +69,6 @@ export class HomeComponent implements OnInit {
       if (this.file) {
         this.filename = this.file.name;
         this.format = this.file.name.split('.');
-        // this.format = this.format[1];
         if (this.format[1] != 'csv') {
           this._snackBar.open("Please select only CSV file", "Close", { duration: 3000 });
           this.deleteFile();
@@ -87,9 +88,26 @@ export class HomeComponent implements OnInit {
      if (this.file) {
       this.showLoader = true;
       let url = "http://127.0.0.1:5002/uploadcsv"
-      this.http.post(url, this.formfile).subscribe((res) => {
-        console.log(res);
-        let d=[];
+      this.http.post(url, this.formfile).subscribe((res:any) => {
+        console.log(res);  
+        console.log(res.columns);   
+        try{
+          let d=[];
+          if(res.columns){
+            let data=res.columns;            
+            for(let i=0;i<data.length;i++){
+              let obj={value:"",viewValue:""};
+              obj["value"]=data[i];
+              obj["viewValue"]=data[i];
+              d.push(obj);
+            }
+            console.log(d);
+          }
+          this.coloumns=d;
+        } 
+        catch(e){
+          console.log(e);
+        }
         this.disables = false;
         this.showLoader = false;
         this._snackBar.open("File successfully uploaded", "Ok", { duration: 5000 });
@@ -114,6 +132,7 @@ export class HomeComponent implements OnInit {
     console.log("Logout");
   }
   submit(){
-    console.log("Submit")
+    console.log("Submit");
+    console.log("value = ",this.selectedValue);
   }
 }
