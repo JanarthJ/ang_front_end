@@ -35,7 +35,7 @@ export class SignUpComponent implements OnInit {
     let datas = this.loginForm.value;
     datas['token']=""
     console.log(datas);
-    localStorage.setItem('user',JSON.stringify(datas));
+    // localStorage.setItem('user',JSON.stringify(datas));
     try {
       await axios({
         method: 'post',

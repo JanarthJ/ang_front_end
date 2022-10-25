@@ -1,0 +1,58 @@
+.Mainhome{
+    background: hsla(208, 68%, 22%, 0.50) ;
+    display: grid;
+    grid-template-rows: 1fr 10fr;
+    height: 100%;
+}
+.tophome{
+    display: grid;
+    grid-template-columns: 7fr 1fr;
+    background-color: hsla(208, 68%, 22%, 1);
+}
+
+.logoutdiv{
+    position: relative;
+}
+.logoutdiv button{
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+}
+.tophome p{
+    margin: auto !important;
+    font-size: 1.5rem;
+    text-align: center;
+    color: azure;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;   
+    /* background: hsla(208, 68%, 22%, 0.50) ; */
+   
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    min-width: 254px;
+}
+.cardgrid{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+.fileupld{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 20px;
+}
+.fileupld button{
+    height: 30px;
+}
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #ffffff !important;
+}

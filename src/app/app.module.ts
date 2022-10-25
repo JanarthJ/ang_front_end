@@ -11,7 +11,13 @@ import { MatInputModule } from '@angular/material/input';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { PgNotFoundComponent } from './pg-not-found/pg-not-found.component';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,6 +35,13 @@ import { PgNotFoundComponent } from './pg-not-found/pg-not-found.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    MatCardModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule
   ],
   providers: [HttpClientModule,HttpClient],
   bootstrap: [AppComponent]
