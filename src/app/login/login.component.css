@@ -51,12 +51,15 @@
     width: 100%;
 }
 .mt-top{
-    margin-top: 30px;
+    /* margin-top: 30px; */
 }
 .buttondiv{
-    margin-top: 30px;
+    /* margin-top: 30px; */
     text-align: center;
 }
+.buttondiv button{
+    width: 50%;
+}
 .mt-top-2{
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }

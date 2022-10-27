@@ -6,7 +6,13 @@
             <mat-icon aria-hidden="false">logout</mat-icon>
         </button></div>         
     </div>
-    <div class="container">   
+    <div [style.display]="showspinner ? 'flex' : 'none'" class="container1">
+        <div class="spinergrid">
+            <mat-spinner style="margin:auto" [color]="color"></mat-spinner>            
+            <h2>Wait for a moment... Predicting ...</h2>
+        </div>
+    </div>
+    <div [style.display]="!showspinner ? 'flex' : 'none'" class="container" >   
         <mat-card class="card">
             <div class="cardgrid">
                 <div class="fileupld">
@@ -36,7 +42,21 @@
                         </select>
                     </div>
                 </div>
-                <div>hj</div>
+                <div>
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label>Enter a date range</mat-label>
+                        <mat-date-range-input  [disabled]="disables" [formGroup]="range" [rangePicker]="picker">
+                          <input matStartDate formControlName="start" placeholder="From date">
+                          <input matEndDate formControlName="end" placeholder="TO date">
+                        </mat-date-range-input>
+                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                      
+                        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                      </mat-form-field>
+                </div>
                 <div class="preditbutn">
                     <button (click)="submit()" [disabled]="disables" mat-flat-button color="accent">
                         <span>Predict</span>                        

@@ -29,7 +29,7 @@
 }
 .example-container input{
     height: 30px;
-    border:1px solid black;
+    border:1px solid hsla(208, 68%, 22%, 0.90);
     color: black;
     border-radius: 3px;
     background-color: aliceblue;
@@ -50,13 +50,13 @@
 .mat-form-field{
     width: 100%;
 }
-.mt-top{
+/* .mt-top{
     margin-top: 30px;
-}
+} */
 .buttondiv{
     margin-top: 30px;
     text-align: center;
 }
-.mt-top-2{
+/* .mt-top-2{
     margin-top: 10px;
-}
+} */

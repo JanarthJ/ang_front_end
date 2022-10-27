@@ -3,6 +3,8 @@ import axios from 'axios';
 import {Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
+import { FormControl, FormGroup } from '@angular/forms';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit {
 
   @ViewChild('fileSelect') myInputVariable?: ElementRef;
-  
+  color: ThemePalette = 'accent';
   filename: any;
   format: any;
   formfile: any;
@@ -21,7 +23,7 @@ export class HomeComponent implements OnInit {
   showLoader: boolean = false;
   disables: boolean=true;
   selectedValue!: string;
-
+  showspinner:boolean = false;
   constructor(private router:Router,private _snackBar: MatSnackBar,private http: HttpClient){
 
       console.log("Home component")
@@ -63,6 +65,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+  
   onFileSelect(event: any) {
     try {
        this.file = event.target.files[0];
@@ -133,6 +140,8 @@ export class HomeComponent implements OnInit {
   }
   submit(){
     console.log("Submit");
+    console.log(this.range.value);
+    this.showspinner=true;
     console.log("value = ",this.selectedValue);
   }
 }

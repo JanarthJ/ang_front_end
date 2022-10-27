@@ -18,6 +18,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -41,9 +43,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatFormFieldModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [HttpClientModule,HttpClient],
+  providers: [HttpClientModule,HttpClient,MatDatepickerModule,
+    MatNativeDateModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
