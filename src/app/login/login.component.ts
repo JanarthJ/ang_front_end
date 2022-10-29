@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
               console.log(data,data[0])
               localStorage.setItem('authtokens',JSON.stringify(data[0]));
               alert("verified Successfully!..");
-              this.router.navigate(['/signup']);
+              this.router.navigate(['/home']);
             }
           }
           else{

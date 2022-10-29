@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import {ThemePalette} from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   disables: boolean=true;
   selectedValue!: string;
   showspinner:boolean = false;
-  constructor(private router:Router,private _snackBar: MatSnackBar,private http: HttpClient){
+  constructor(private router:Router,private _snackBar: MatSnackBar,private http: HttpClient,public datepipe: DatePipe){
 
       console.log("Home component")
     //   let datas=localStorage.getItem('authtokens');
@@ -138,10 +139,26 @@ export class HomeComponent implements OnInit {
   logout(){
     console.log("Logout");
   }
+  
   submit(){
     console.log("Submit");
-    console.log(this.range.value);
-    this.showspinner=true;
-    console.log("value = ",this.selectedValue);
+    this.formfile.append('columnPredict', JSON.stringify(this.selectedValue));
+    this.formfile.append('fromDate', this.datepipe.transform(this.range.value.start, 'yyyy/MM/dd'));
+    this.formfile.append('toDate', this.datepipe.transform(this.range.value.end, 'yyyy/MM/dd'));
+   
+    let url = "http://127.0.0.1:5002/predict"
+    this.http.post(url, this.formfile).subscribe((res:any) => {
+      console.log(res);   
+      try{
+        // console.log();
+      } 
+      catch(e){
+        console.log(e);
+      }
+      this._snackBar.open("Predicted successfully", "Ok", { duration: 5000 });
+    },(error) => {
+        console.log(error);
+        this._snackBar.open(error.message, "Close", { duration: 5000 });
+      });
   }
 }
