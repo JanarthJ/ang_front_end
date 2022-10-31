@@ -34,6 +34,7 @@
     /* background: hsla(208, 68%, 22%, 0.50) ; */
    
 }
+
 .container1{
     display: flex;
     justify-content: center;
@@ -44,6 +45,16 @@
     /* background: hsla(208, 68%, 22%, 0.50) ; */
    
 }
+.rescontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;  
+    color: hsla(400, 59%, 65%, 1); 
+    
+}
+
 .spinergrid{
     display: grid;
     grid-template-rows: 3fr 1fr;
@@ -73,6 +84,28 @@
 .preditbutn button{
     margin-top: 20px;
     width: 100%;
+}
+
+/* resultant grid */
+.resgrid{
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    background-color:hsla(208, 68%, 22%, 0.50);
+}
+.resgridhead{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    background-color: blanchedalmond;
+    color: blue !important;
+}
+.resgridbody{
+    color: #ffffff;
+}
+.resgridbody img{
+    width: 100%;
+    height: auto;
+    min-width: 400px;
+    min-height:250px;
 }
 
 ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {

@@ -6,13 +6,13 @@
             <mat-icon aria-hidden="false">logout</mat-icon>
         </button></div>         
     </div>
-    <div [style.display]="showspinner ? 'flex' : 'none'" class="container1">
+    <div [style.display]="showspinner && !showResult ? 'flex' : 'none'" class="container1">
         <div class="spinergrid">
             <mat-spinner style="margin:auto" [color]="color"></mat-spinner>            
             <h2>Wait for a moment... Predicting ...</h2>
         </div>
     </div>
-    <div [style.display]="!showspinner ? 'flex' : 'none'" class="container" >   
+    <div [style.display]="!showspinner && !showResult ? 'flex' : 'none'" class="container" >   
         <mat-card class="card">
             <div class="cardgrid">
                 <div class="fileupld">
@@ -44,17 +44,10 @@
                 </div>
                 <div>
                     <mat-form-field style="width: 100%;" appearance="fill">
-                        <mat-label>Enter a date range</mat-label>
-                        <mat-date-range-input  [disabled]="disables" [formGroup]="range" [rangePicker]="picker">
-                          <input matStartDate formControlName="start" placeholder="From date">
-                          <input matEndDate formControlName="end" placeholder="TO date">
-                        </mat-date-range-input>
-                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker></mat-date-range-picker>
-                      
-                        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                        <mat-label>No of Days to Predict</mat-label>
+                            <input [disabled]="disables" formControlName="aNumberField" numberOnly type="number" step="10000"
+                            (change)="change($event)" matInput #postalCode maxlength="5" placeholder="Ex.365" value="365">
+                            <!-- <mat-hint>{{postalCode.value.length}}</mat-hint> -->
                       </mat-form-field>
                 </div>
                 <div class="preditbutn">
@@ -64,5 +57,18 @@
                 </div>
             </div>
         </mat-card>
+    </div>
+    <div [style.display]="showResult ? 'flex' : 'none'" class="rescontainer" >
+        <div class="resgrid">
+            <div class="resgridhead">
+                <div>Result of Forecasting Prediction</div>
+                <div>Back</div>
+            </div>
+            <div class="resgridbody">
+                <img src={{resultantGraph}}  alt="res"/>
+            </div>
+        </div>
+
+
     </div>
 </div>
