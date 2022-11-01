@@ -54,6 +54,9 @@
                     <button (click)="submit()" [disabled]="disables" mat-flat-button color="accent">
                         <span>Predict</span>                        
                     </button>
+                    <button (click)="result()" [style.display]="showForward ? 'block' : 'none'"  mat-flat-button color="primary">
+                        <span>Result</span>                        
+                    </button>
                 </div>
             </div>
         </mat-card>
@@ -61,12 +64,36 @@
     <div [style.display]="showResult ? 'flex' : 'none'" class="rescontainer" >
         <div class="resgrid">
             <div class="resgridhead">
-                <div>Result of Forecasting Prediction</div>
-                <div>Back</div>
+                <div class="inhead">
+                    <button (click)="back()" mat-flat-button color="accent">
+                        <span>Back</span>                        
+                    </button>
+                </div>
+                <div class="inhead1">Result of Forecasting</div>
+                <div class="inhead">
+                    <button (click)="newPredict()"  mat-flat-button color="primary">
+                        <span>New</span>                        
+                    </button>
+                </div>
             </div>
             <div class="resgridbody">
                 <img src={{resultantGraph}}  alt="res"/>
-
+                <!-- <img src={{dummyImage}}  alt="res"/> -->
+            </div>
+            <div class="accuracyhead">
+                Model validation metrics 
+            </div>
+            <div class="accuracygrid">
+                <div>ADF_Statistic</div>
+                <div>P_Value</div>
+                <div>RMSE</div>
+                <div>MAPE</div>
+            </div>
+            <div class="accuracygrid">
+                <div>{{accurayObj['ADF_Statistic']}}</div>
+                <div>{{accurayObj['p_value']}}</div>
+                <div>{{accurayObj['rmse']}}</div>
+                <div>{{accurayObj['mape']}}</div>
             </div>
         </div>
 

@@ -1,0 +1,23 @@
+.mainDiv{
+    /* background: hsla(208, 68%, 22%, 0.90); */
+    height:auto;
+    min-height: 200px;
+    width: 30%;
+    color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 5px;
+    position: absolute;
+    left: 30%;
+    top: 30%;
+}
+
+.subdiv{
+    /* background: url(../../assets/404.jpg); */
+    height:20rem;
+    min-height: 250px;
+    background-position: center;
+}

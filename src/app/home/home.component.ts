@@ -25,44 +25,59 @@ export class HomeComponent implements OnInit {
   predictDays: Number = 365;
   showspinner:boolean = false;
   showResult:boolean =false;
+  showForward:boolean=false;
+  userDetails:any;
   //for graph showing
+  accurayObj={
+    ADF_Statistic:0.0,
+    p_value:0.0,
+    rmse:0.0,
+    mape:0.0
+  }
   resultantGraph:any
+  dummyImage:String="https://i.imgur.com/DvpvklR.png";
   constructor(private router:Router,private _snackBar: MatSnackBar,private http: HttpClient){
 
-      console.log("Home component")
-    //   let datas=localStorage.getItem('authtokens');
-    //   console.log(datas);
-    //   if(datas){
-    //   try {
-    //     axios({
-    //       method: 'post',
-    //       url: 'http://127.0.0.1:5002/checkAuth',
-    //       data:JSON.parse(datas)
-    //     }).then( (response) => {
-    //         console.log(response);
-    //         if(response.data){
-    //           if(response.data.status==="Valid"){ 
-    //             console.log("Valid auth");                
-    //           }
-    //           else{
-    //             alert("Please login!..")
-    //             localStorage.removeItem('authtokens');
-    //             this.router.navigate(['/login']);
-    //           }
-    //         }
-    //         else{
-    //           alert("Please login!..")
-    //           localStorage.removeItem('authtokens');
-    //           this.router.navigate(['/login']);
-    //         }
-    //       });
-    //   }catch (error) {
-    //     alert("Internal Server Error!..");
-    //     localStorage.removeItem('authtokens');
-    //     this.router.navigate(['/login']);
-    //     console.log(error);        
-    //   }  
-    // }
+      console.log("Home component");
+
+      let datas=localStorage.getItem('authtokens');
+      console.log(datas);
+      if(datas){
+        try {
+          axios({
+            method: 'post',
+            url: 'http://127.0.0.1:5002/checkAuth',
+            data:JSON.parse(datas)
+          }).then( (response) => {
+              console.log(response);
+              if(response.data){
+                if(response.data.status==="Valid"){ 
+                  console.log("Valid auth");                
+                }
+                else{
+                  this._snackBar.open("Please Login!..", "Ok", { duration: 5000 });
+                  localStorage.removeItem('authtokens');
+                  this.router.navigate(['/login']);
+                }
+              }
+              else{
+                this._snackBar.open("Please Login!..", "Ok", { duration: 5000 });
+                localStorage.removeItem('authtokens');
+                this.router.navigate(['/login']);
+              }
+            });
+        }catch (error) {
+          this._snackBar.open("Internal Server Error !..", "Ok", { duration: 5000 });        
+          localStorage.removeItem('authtokens');
+          this.router.navigate(['/login']);
+          console.log(error);        
+        }  
+    }
+    else{
+      this._snackBar.open("Please Login!..", "Ok", { duration: 5000 });
+      localStorage.removeItem('authtokens');
+      this.router.navigate(['/login']);
+    }
    }
 
   ngOnInit(): void {
@@ -134,9 +149,14 @@ export class HomeComponent implements OnInit {
     this.filename = null;
     this.disables=true;
     this.formfile.delete('file');
+    console.log("delete file")
   }
   logout(){
     console.log("Logout");
+    localStorage.removeItem("authtokens");
+    localStorage.removeItem("user");
+    this._snackBar.open("Successfully logged out!..", "Ok", { duration: 5000 }); 
+    this.router.navigate(['/login']);
   }
   change=(event:any)=>{
       this.predictDays=Number(event.target.value);        
@@ -157,11 +177,17 @@ export class HomeComponent implements OnInit {
           console.log(res);   
           if(res){
             this.resultantGraph=res.graph;
+            this.accurayObj['ADF_Statistic']=res.ADF_Statistic.toFixed(3);
+            this.accurayObj['p_value']=res.p_value.toFixed(3);
+            this.accurayObj['rmse']=res.rmse.toFixed(3);
+            this.accurayObj['mape']=res.mape.toFixed(3);
             this.formfile.delete("dayPredict");
             this.formfile.delete("columnPredict");
             this.showResult=true;
+            this._snackBar.open("Predicted successfully", "Ok", { duration: 5000 });
+            this._snackBar.open("Resultant csv Stored in this path :"+res.path, "Ok", { duration: 5000 });
           }
-          this._snackBar.open("Predicted successfully", "Ok", { duration: 5000 });
+          
         } 
         catch(e){
           console.log(e); 
@@ -172,5 +198,27 @@ export class HomeComponent implements OnInit {
           this._snackBar.open(error.message, "Close", { duration: 5000 });
         });
     }
+  }
+  result(){
+    console.log("result");
+    this.showResult=true;
+  }
+  back(){
+    console.log("back");
+    this.showResult=false;
+    this.showForward=true;
+  }
+  newPredict(){
+    console.log("new");
+    this.accurayObj['ADF_Statistic']=0.0;
+    this.accurayObj['p_value']=0.0;
+    this.accurayObj['rmse']=0.0;
+    this.accurayObj['mape']=0.0;
+    this.predictDays=365;
+    this.selectedValue="";
+    this.showForward=false;
+    this.showResult=false;
+    this.showspinner = false;
+    this.disables=true;
   }
 }

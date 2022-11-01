@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pg-not-found',
@@ -8,14 +9,25 @@ import { Router } from '@angular/router';
 })
 export class PgNotFoundComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
   ngAfterViewInit() {
-    let self = this;
-    setTimeout(function () {
-      self.router.navigateByUrl('/login');
-    }, 3000)
+    let datas=localStorage.getItem('authtokens');
+      if(datas){
+        this._snackBar.open("Invalid route!.. Redirect to home Page", "Ok", { duration: 5000 }); 
+        let self = this;
+        setTimeout(function () {
+        self.router.navigateByUrl('/home');
+        }, 3000)
+      }
+      else{
+        this._snackBar.open("Invalid route!.. Redirect to Login Page", "Ok", { duration: 5000 });
+        let self = this;
+        setTimeout(function () {
+          self.router.navigateByUrl('/login');
+        }, 3000)
+      }
   }
 }

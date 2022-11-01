@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {Router } from '@angular/router';
 import axios from 'axios';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class SignUpComponent implements OnInit {
 
   loginForm: FormGroup | any;
   title = 'material-SignUp';
-  constructor(private router:Router) 
+  constructor(private router:Router,private _snackBar: MatSnackBar) 
   {
     this.loginForm = new FormGroup({
     name:new FormControl(''),
@@ -47,19 +48,23 @@ export class SignUpComponent implements OnInit {
             let data = response.data;
             if(response.data.status){
               console.log(data);              
-              alert(data.status);
+              // alert(data.status);
+              if(data.status === "Email Already Exist"){
+                this._snackBar.open("Email Already Exist!..", "Ok", { duration: 5000 });
+              }
               if(data.status!=="EMail Already Exist"){
+                this._snackBar.open("User registered Successfully!..", "Ok", { duration: 5000 });
                 this.router.navigate(['/login']);
-              };              
+              };          
+                  
             }
           }
           else{
-            // this.toastr.error('Invalid Cre dentials!', 'Try again!');
-            alert("Try again later !..");
+            this._snackBar.open("Internal Server Error!..", "Ok", { duration: 5000 });
           }
         });
     } catch (error) {
-      alert("Internal Server Error !..");      
+      this._snackBar.open("Internal Server Error!..", "Ok", { duration: 5000 });     
       console.log(error);
     } 
     

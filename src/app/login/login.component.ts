@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {Router } from '@angular/router';
 import axios from 'axios';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup | any;
   title = 'material-login';
   
-  constructor(private router:Router) 
+  constructor(private router:Router,private _snackBar: MatSnackBar) 
   {
   this.loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email,Validators.pattern(
@@ -30,11 +31,7 @@ export class LoginComponent implements OnInit {
     if(!this.loginForm.valid){
       return;
     }
-    console.log(this.loginForm.value);
-    localStorage.setItem('user',this.loginForm.value);
-    //  this.httpClient.get('http://127.0.0.1:5002/').subscribe((data: any) => {
-    //    console.log(data);
-    // })
+    console.log(this.loginForm.value);   
     try {
       await axios({
         method: 'post',
@@ -46,18 +43,17 @@ export class LoginComponent implements OnInit {
             let data = response.data.data;
             if(response.data.status==="Verified"){
               console.log(data,data[0])
-              localStorage.setItem('authtokens',JSON.stringify(data[0]));
-              alert("verified Successfully!..");
+              localStorage.setItem('authtokens',JSON.stringify(data[0]));              
+              this._snackBar.open("Verified Successfully!..", "Ok", { duration: 5000 });
               this.router.navigate(['/home']);
             }
           }
           else{
-            // this.toastr.error('Invalid Cre dentials!', 'Try again!');
-            alert("Invalid Credential!..")
+            this._snackBar.open("Invalid Credential!..", "Ok", { duration: 5000 });
           }
         });
     } catch (error) {
-      alert("Internal Server Error!..");
+      this._snackBar.open("Internal Server Error!..", "Ok", { duration: 5000 });
       console.log(error);
     } 
     
