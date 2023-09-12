@@ -33,25 +33,26 @@ export class LoginComponent implements OnInit {
     }
     console.log(this.loginForm.value);   
     try {
-      await axios({
-        method: 'post',
-        url: 'http://127.0.0.1:5002/auth',
-        data:this.loginForm.value
-      }).then( (response) => {
-          console.log(response);
-          if(response.data.data){
-            let data = response.data.data;
-            if(response.data.status==="Verified"){
-              console.log(data,data[0])
-              localStorage.setItem('authtokens',JSON.stringify(data[0]));              
-              this._snackBar.open("Verified Successfully!..", "Ok", { duration: 5000 });
-              this.router.navigate(['/home']);
-            }
-          }
-          else{
-            this._snackBar.open("Invalid Credential!..", "Ok", { duration: 5000 });
-          }
-        });
+      // await axios({
+      //   method: 'post',
+      //   url: 'http://127.0.0.1:5002/auth',
+      //   data:this.loginForm.value
+      // }).then( (response) => {
+      //     console.log(response);
+      //     if(response.data.data){
+      //       let data = response.data.data;
+      //       if(response.data.status==="Verified"){
+      //         console.log(data,data[0])
+      //         localStorage.setItem('authtokens',JSON.stringify(data[0]));              
+      //         this._snackBar.open("Verified Successfully!..", "Ok", { duration: 5000 });
+      //         this.router.navigate(['/home']);
+      //       }
+      //     }
+      //     else{
+      //       this._snackBar.open("Invalid Credential!..", "Ok", { duration: 5000 });
+      //     }
+      //   });
+      this.router.navigate(['/home']);
     } catch (error) {
       this._snackBar.open("Internal Server Error!..", "Ok", { duration: 5000 });
       console.log(error);

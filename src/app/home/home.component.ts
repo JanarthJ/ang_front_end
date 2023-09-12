@@ -43,41 +43,41 @@ export class HomeComponent implements OnInit {
       let datas=localStorage.getItem('authtokens');
       console.log(datas);
       if(datas){
-        try {
-          axios({
-            method: 'post',
-            url: 'http://127.0.0.1:5002/checkAuth',
-            data:JSON.parse(datas)
-          }).then( (response) => {
-              console.log(response);
-              if(response.data){
-                if(response.data.status==="Valid"){ 
-                  console.log("Valid auth");                
-                }
-                else{
-                  this._snackBar.open("Please Login!..", "Ok", { duration: 5000 });
-                  localStorage.removeItem('authtokens');
-                  this.router.navigate(['/login']);
-                }
-              }
-              else{
-                this._snackBar.open("Please Login!..", "Ok", { duration: 5000 });
-                localStorage.removeItem('authtokens');
-                this.router.navigate(['/login']);
-              }
-            });
-        }catch (error) {
-          this._snackBar.open("Internal Server Error !..", "Ok", { duration: 5000 });        
-          localStorage.removeItem('authtokens');
-          this.router.navigate(['/login']);
-          console.log(error);        
-        }  
+        // try {
+        //   axios({
+        //     method: 'post',
+        //     url: 'http://127.0.0.1:5002/checkAuth',
+        //     data:JSON.parse(datas)
+        //   }).then( (response) => {
+        //       console.log(response);
+        //       if(response.data){
+        //         if(response.data.status==="Valid"){ 
+        //           console.log("Valid auth");                
+        //         }
+        //         else{
+        //           this._snackBar.open("Please Login!..", "Ok", { duration: 5000 });
+        //           localStorage.removeItem('authtokens');
+        //           this.router.navigate(['/login']);
+        //         }
+        //       }
+        //       else{
+        //         this._snackBar.open("Please Login!..", "Ok", { duration: 5000 });
+        //         localStorage.removeItem('authtokens');
+        //         this.router.navigate(['/login']);
+        //       }
+        //     });
+        // }catch (error) {
+        //   this._snackBar.open("Internal Server Error !..", "Ok", { duration: 5000 });        
+        //   localStorage.removeItem('authtokens');
+        //   this.router.navigate(['/login']);
+        //   console.log(error);        
+        // }  
     }
-    else{
-      this._snackBar.open("Please Login!..", "Ok", { duration: 5000 });
-      localStorage.removeItem('authtokens');
-      this.router.navigate(['/login']);
-    }
+    // else{
+    //   this._snackBar.open("Please Login!..", "Ok", { duration: 5000 });
+    //   localStorage.removeItem('authtokens');
+    //   this.router.navigate(['/login']);
+    // }
    }
 
   ngOnInit(): void {
