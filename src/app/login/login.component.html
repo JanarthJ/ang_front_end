@@ -16,7 +16,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <br/>
+        <!-- <br/> -->
         <div class="mt-top-2">
           <mat-form-field>
             <span>Password<b>*</b></span>
@@ -29,8 +29,27 @@
             </mat-error>
           </mat-form-field>
         </div>
+
+        <div class="mt-top-2">
+          <label><b>Role</b></label><br>
+          <select [(ngModel)]="selectedValue" name="columns">
+            <option *ngFor="let column of coloumns" [value]="column.value">
+              {{column.viewValue}}
+            </option>
+          </select>
+        </div>
+        <br/>
+        <div>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="selectedDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+        
+
         <div class="buttondiv">
-          <button [disabled]="!loginForm.valid" mat-raised-button color="primary" mat-button>Sign In</button>
+          <button  mat-raised-button color="primary" mat-button>Sign In</button>
         </div>
       </div>
     </form>

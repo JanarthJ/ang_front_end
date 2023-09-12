@@ -1,5 +1,6 @@
 .mainappdiv{
-    background: url(../assets/b1.jpg) no-repeat;
+    /* background: url(../assets/b2.jpg) no-repeat; */
+    background-color: #fff;
     height: 100vh;
     position: relative;
 }

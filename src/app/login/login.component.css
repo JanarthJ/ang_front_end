@@ -1,5 +1,5 @@
 .mainDiv{
-    background: hsla(208, 68%, 22%, 0.90);
+    background:darkcyan;;
     height:auto;
     min-height: 200px;
     width: 30%;
@@ -12,12 +12,12 @@
     border-radius: 5px;
     position: absolute;
     left: 30%;
-    top: 30%;
+    top: 10%;
 }
 
 .example-container{
-    height: 50%;
-    width: 70%;
+    /* height: 50%; */
+    /* width: 70%; */
     text-align: left;
 }
 .example-container input{
@@ -52,4 +52,8 @@
 }
 .mt-top-2{
     margin-top: 10px;
+}
+select{
+    width: 100%;
+    height: 30px;
 }
